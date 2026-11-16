@@ -1,0 +1,8 @@
+<mat-form-field class="full-width" [class.has-description]="!!formEl.Description" *ngIf="showElement">
+  <mat-label>{{ formEl.Description ? '' : formEl.Label ? (formEl.Label | translate) : '' }}</mat-label>
+  <input matInput
+         [formControl]="formControl">
+  <mat-error>
+    <odcp-form-generator-error [control]="control"></odcp-form-generator-error>
+  </mat-error>
+</mat-form-field>

@@ -1,0 +1,3 @@
+<ng-container *ngIf="control.errors">
+  <div [innerHTML]="'FORM_GENERATOR.VALIDATIONS.' + getErrorKey(control.errors) | translate: control.errors"></div>
+</ng-container>

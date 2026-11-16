@@ -1,0 +1,38 @@
+<div class="meta-data-container">
+  <ng-container *ngIf="isObject(data)">
+    <ng-container *ngFor="let entry of objectEntries(data)">
+      <div>
+        <div class="meta-data-field-key">{{entry[0]}}</div>
+        <odcp-table-metadata *ngIf="isObject(entry[1])" [data]="entry[1]">
+        </odcp-table-metadata>
+
+        <odcp-table-metadata *ngIf="isArray(entry[1])" [data]="entry[1]">
+        </odcp-table-metadata>
+
+        <div class="meta-data-field-value" 
+             *ngIf="isPrimitive(entry[1])" 
+             [innerHTML]="displayValue(entry[1])">
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="isArray(data)">
+    <ul class="meta-data-field-value-list">
+      <li *ngFor="let item of data; let i = index">
+        <odcp-table-metadata *ngIf="isObject(item)" [data]="item">
+        </odcp-table-metadata>
+
+        <odcp-table-metadata *ngIf="isArray(item)" [data]="item">
+        </odcp-table-metadata>
+
+        <ng-container class="meta-data-field-value" *ngIf="isPrimitive(item)">
+          <div [innerHTML]="displayValue(item)"></div> 
+        </ng-container>
+      </li>
+    </ul>
+  </ng-container>
+
+  <div class="meta-data-field-value" *ngIf="isPrimitive(data)" [innerHTML]="displayValue(data)">
+  </div>
+</div>

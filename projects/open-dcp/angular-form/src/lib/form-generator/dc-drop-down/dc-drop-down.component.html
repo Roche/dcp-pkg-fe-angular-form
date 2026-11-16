@@ -1,0 +1,42 @@
+<mat-form-field [floatLabel]="'always'" class="full-width"
+  [class.has-description]="!!formEl.Description" *ngIf="showElement">
+  <mat-label>{{ formEl.Description ? '' : formEl.Label ? (formEl.Label | translate) : '' }}</mat-label>
+  <mat-select [formControl]="dropDownControl"
+              [compareWith]="compareOptionValues"
+              [disabled]="control.root.disabled || isReadOnly"
+              (openedChange)="onOpenedChange($event)">
+    <mat-form-field class="mat-select-filter_wrap">
+      <input
+        matInput
+        [formControl]="filterInput"
+        placeholder="Search..."
+        class="mat-select-filter_input"/>
+    </mat-form-field>
+    @for (element of groupedOptions; track element) {
+      @if (groupOption(element).name) {
+        <mat-optgroup [label]="groupOption(element).name">
+          @for (option of groupOption(element).options; track option) {
+            <mat-option [value]="option.Value">
+              <span>{{ option.Label }}</span>
+            </mat-option>
+          }
+        </mat-optgroup>
+      } @else {
+        <mat-option [value]="fieldOption(element).Value">
+          <span>{{ fieldOption(element)?.Label }}</span>
+        </mat-option>
+      }
+    }
+</mat-select>
+
+  <button *ngIf="dropDownControl.value && !isRequired && !isReadOnly"
+          matSuffix mat-icon-button
+          aria-label="Clear selection"
+          (click)="deselect($event)">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <mat-error>
+    <odcp-form-generator-error [control]="control"></odcp-form-generator-error>
+  </mat-error>
+</mat-form-field>

@@ -1,0 +1,58 @@
+<mat-form-field [floatLabel]="'always'" class="full-width form-generator_multiselect"
+  [class.has-description]="!!formEl.Description" *ngIf="showElement">
+  <mat-label>{{ formEl.Description ? '' : formEl.Label ? (formEl.Label | translate) : '' }}</mat-label>
+
+
+  <mat-select [formControl]="copyFormControl"
+              [compareWith]="compareOptionValues"
+              multiple
+              (openedChange)="onOpenedChange($event)"
+              [panelClass]="'custom-multiselect-panel'">
+
+    <mat-select-trigger>
+      <mat-chip-listbox #chipGrid aria-label="Enter fruits">
+        @for (selectedValue of getSelectedOptions(); track selectedValue) {
+          <mat-chip-row class="dropdown-chip" (removed)="onRemoveTag(selectedValue)">
+            <span class="chip-label">{{ getLabelForValue(selectedValue) }}</span>
+            <button matChipRemove [attr.aria-label]="'remove ' + getLabelForValue(selectedValue)">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+        }
+      </mat-chip-listbox>
+    </mat-select-trigger>
+    <div class="search-select-all">
+      <mat-form-field class="mat-select-filter_wrap">
+        <input
+          matInput
+          [formControl]="filterInput"
+          placeholder="Search..."
+          class="mat-select-filter_input"/>
+      </mat-form-field>
+      <mat-option [value]="selectAllFields" (click)="toggleSelectAll()" *ngIf="formEl.allowMultiSelect"
+        class="select-all-option">
+        <span>{{ 'FORM_GENERATOR.SELECT_ALL' | translate }}</span>
+      </mat-option>
+    </div>
+    @for (element of groupedOptions; track element) {
+      @if (groupOption(element).name) {
+        <mat-optgroup [label]="groupOption(element).name">
+          @for (option of groupOption(element).options; track option) {
+            <mat-option [value]="option.Value" (click)="onOptionSelected()">
+              <span>{{ option.Label }}</span>
+            </mat-option>
+          }
+        </mat-optgroup>
+      } @else {
+        <mat-option [value]="fieldOption(element).Value" (click)="onOptionSelected()">
+          <span>{{ fieldOption(element)?.Label }}</span>
+        </mat-option>
+      }
+    }
+  </mat-select>
+
+  <mat-error>
+    <odcp-form-generator-error [control]="control"></odcp-form-generator-error>
+  </mat-error>
+</mat-form-field>
+

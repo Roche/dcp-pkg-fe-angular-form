@@ -1,0 +1,15 @@
+<ng-container [formGroup]="formCopy" *ngIf="showForm && formCopy">
+  <div [class]="elementsClass"
+       [ngClass]="{
+       'form-array': formEl.FieldType === fieldTypeEnum.Array,
+       'form-description': formEl.FieldType === fieldTypeEnum.Description
+       }"
+       [attr.dcpt]="'FormGenerator.' + formEl.Name"
+       *ngFor="let formEl of formGeneratorSettings">
+
+    <ng-container
+      *ngComponentOutlet="formGeneratorService.getFieldComponent(formEl, fieldComponentOverrides);
+        inputs formGeneratorService.getFieldInputs(formEl, formCopy, true, true, fieldComponentOverrides)"/>
+
+  </div>
+</ng-container>

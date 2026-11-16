@@ -1,0 +1,9 @@
+<div class="full-width custom-date-picker" *ngIf="showElement">
+  <dcp-time-range [placeholder]=" formEl.Label ? (formEl.Label | translate) : ''" *ngIf="timeRange"
+    [language]="language$ | async" [timezone]="(timeZone$ | async) || 'UTC'" [timeRange]="timeRange"
+    (timeRangeChange)="timeRangeSelected($event)">
+  </dcp-time-range>
+  <mat-error>
+    <odcp-form-generator-error [control]="formControl"></odcp-form-generator-error>
+  </mat-error>
+</div>

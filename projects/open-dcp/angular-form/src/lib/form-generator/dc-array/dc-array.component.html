@@ -1,0 +1,51 @@
+<div class="p-3 form-generator_array mb-3"
+     *ngIf="control?.parent"
+    [hidden]="!showElement || !parentIsVisible"
+    [formGroup]="parent">
+
+  <div class="form-generator_array_header">
+    <odcp-section-paper-title>{{ formEl.Description ? '' : formEl.Label }}</odcp-section-paper-title>
+    <mat-error class="form-generator_array_error">
+      <odcp-form-generator-error [control]="control"></odcp-form-generator-error>
+    </mat-error>
+    <button mat-flat-button
+            class="page-create-menu_button-show-extra"
+            color="primary"
+            *ngIf="!formEl.FieldSettings || !formEl.FieldSettings?.IsReadOnly || formEl.FieldSettings?.IsReadOnly === false"
+            (click)="addNewArrayGroup()">+</button>
+  </div>
+
+  <mat-accordion class="form-generator_array_accordion"
+                 [formArrayName]="formEl.Name"
+                  multi="true">
+    <mat-expansion-panel *ngFor="let group of formArray.controls; let i = index" [formGroupName]="i" [expanded]="expandedElements[i]">
+      <mat-expansion-panel-header>
+        <div class="form-generator_array_element_header">
+          <span>{{formEl.Label}} {{i + 1}}</span>
+
+          <div class="ml-auto" *ngIf="!formEl.FieldSettings || !formEl.FieldSettings?.IsReadOnly || formEl.FieldSettings?.IsReadOnly === false">
+            <odcp-flat-button [disabled]="false"
+                              class="form-generator_array_button-remove"
+                              color="warn"
+                              (click)="removeArrayGroup(i)">
+              <mat-icon class="color-white mr-0">close</mat-icon>
+            </odcp-flat-button>
+          </div>
+        </div>
+      </mat-expansion-panel-header>
+
+      <div class="form-generator_array_element_content">
+        <div class="forn-generator_array_element_form form-generator_array_element_form"
+             [ngClass]="{'form-array': subEl.FieldType === fieldTypeEnum.Array}"
+             *ngFor="let subEl of formEl.Children">
+
+          <ng-container
+            *ngComponentOutlet="formGeneratorService.getFieldComponent(subEl, fieldComponentOverrides);
+            inputs getSubFieldInputs(subEl, group)"/>
+        </div>
+
+      </div>
+    </mat-expansion-panel>
+</mat-accordion>
+
+</div>

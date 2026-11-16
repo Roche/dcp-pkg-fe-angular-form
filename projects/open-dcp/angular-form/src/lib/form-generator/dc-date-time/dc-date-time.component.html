@@ -1,0 +1,11 @@
+<div class="full-width custom-date-picker" *ngIf="showElement">
+    <mat-label class="date-label">{{ formEl.Description ? '' : formEl.Label ? (formEl.Label | translate) : '' }}</mat-label>
+  <input matInput
+    type="datetime-local"
+    class="datetime-input"
+    [formControl]="formControl"
+    placeholder="DD/MM/YYYY HH:mm">
+  <mat-error>
+    <odcp-form-generator-error [control]="control"></odcp-form-generator-error>
+  </mat-error>
+</div>

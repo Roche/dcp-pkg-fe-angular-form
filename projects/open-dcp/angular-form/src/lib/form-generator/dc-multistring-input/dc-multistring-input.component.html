@@ -1,0 +1,31 @@
+<mat-form-field class="full-width" [class.has-description]="!!formEl.Description" *ngIf="showElement">
+  <mat-label>{{ formEl.Description ? '' : formEl.Label ? (formEl.Label | translate) : '' }}</mat-label>
+  <mat-chip-grid #chipList class="multistring_chips-grid">
+
+    <mat-chip-row
+      *ngFor="let element of elements"
+      class="multistring_chip dropdown-chip"
+      [editable]="true"
+      (edited)="edit(element, $event)"
+      (removed)="remove(element)">
+      <span class="chip-label">{{element}}</span>
+      <button matChipRemove [attr.aria-label]="'remove ' + element">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip-row>
+
+    <input [placeholder]="'Enter text and press Enter' | translate"
+           #formulaInput
+           matInput
+           [formControl]="formulaCtrl"
+           [matChipInputFor]="chipList"
+           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+           [matChipInputAddOnBlur]="true"
+           (matChipInputTokenEnd)="add($event)"/>
+  </mat-chip-grid>
+
+  <mat-error>
+    <odcp-form-generator-error [control]="control"></odcp-form-generator-error>
+  </mat-error>
+
+</mat-form-field>

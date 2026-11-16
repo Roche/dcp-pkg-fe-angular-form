@@ -1,0 +1,25 @@
+
+<div class="mfm-paper-content p-3 form-generator_group mb-3"
+     [hidden]="!showElement || !parentIsVisible"
+     [formGroup]="formGroup">
+
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <odcp-section-paper-title>{{formEl.Label}}</odcp-section-paper-title>
+  </div>
+
+  <div class="mfm-paper-content p-3 d-flex ml-n3 mr-n3 mt-1 form-generator_group_section align-items-center">
+    <div class="form-generator_group_form flex-grow-1 pr-3">
+      <div class="form-generator_group_el"
+           [ngClass]="{'form-array': formEl.FieldType === fieldTypeEnum.Array}"
+           *ngFor="let subEl of formEl.Children">
+
+        <ng-container
+          *ngComponentOutlet="formGeneratorService.getFieldComponent(subEl, fieldComponentOverrides);
+        inputs formGeneratorService.getFieldInputs(subEl, formGroup, showElement, parentIsVisible, fieldComponentOverrides)"/>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>
