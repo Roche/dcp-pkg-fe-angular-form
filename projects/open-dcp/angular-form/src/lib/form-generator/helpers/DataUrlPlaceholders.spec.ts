@@ -3,7 +3,6 @@ jest.mock('../dc-form-generator.service', () => ({
 }));
 
 import { DataLoaderClass } from './DataLoader.class';
-import { TableDataLoaderClass } from './TableDataLoader.class';
 
 type LoaderPrototype = {
   getDataUrlKeys: () => string[];
@@ -118,16 +117,8 @@ describe('DataUrl placeholder resolution', () => {
     assertMixedPlaceholderResolution(DataLoaderClass.prototype as unknown as LoaderPrototype);
   });
 
-  it('supports mixed ${key}, ${./key}, ${../path}, ${$root.path} in TableDataLoader', () => {
-    assertMixedPlaceholderResolution(TableDataLoaderClass.prototype as unknown as LoaderPrototype);
-  });
-
   it('supports ../../../ traversal in DataLoader', () => {
     assertMultiLevelRelativeTraversal(DataLoaderClass.prototype as unknown as LoaderPrototype);
-  });
-
-  it('supports ../../../ traversal in TableDataLoader', () => {
-    assertMultiLevelRelativeTraversal(TableDataLoaderClass.prototype as unknown as LoaderPrototype);
   });
 });
 

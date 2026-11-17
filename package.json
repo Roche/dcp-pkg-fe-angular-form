@@ -1,6 +1,6 @@
 {
   "name": "angular-form",
-  "version": "17.7.3",
+  "version": "17.8.0",
   "scripts": {
     "ng": "ng",
     "prepare": "husky install",

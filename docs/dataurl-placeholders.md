@@ -4,7 +4,6 @@ This document describes how `DataUrl` placeholders are resolved in the form gene
 
 Applies to:
 - `projects/open-dcp/angular-form/src/lib/form-generator/helpers/DataLoader.class.ts`
-- `projects/open-dcp/angular-form/src/lib/form-generator/helpers/TableDataLoader.class.ts`
 
 ## Supported Placeholder Standards
 

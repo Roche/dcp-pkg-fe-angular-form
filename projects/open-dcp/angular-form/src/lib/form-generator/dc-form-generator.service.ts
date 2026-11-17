@@ -48,7 +48,6 @@ import {
   FormGeneratorFieldComponentConfig,
   resolveFormGeneratorFieldComponent
 } from "./form-generator.tokens";
-import { DcTableComponent } from "./dc-table/dc-table.component";
 import { DcFormGeneratorTextComponent } from "./dc-fg-text/dc-form-generator-text.component";
 
 @Injectable({providedIn: 'root'})
@@ -71,7 +70,6 @@ export class ODCPFormGeneratorService {
     {type: FieldTypeEnum.TimeRange, component: DcTimeRangeComponent},
     {type: FieldTypeEnum.ExtendableDropDown, component: DcExtendableDropDownComponent},
     {type: FieldTypeEnum.Secret, component: DcSecretInputComponent},
-    {type: FieldTypeEnum.Table, component: DcTableComponent},
     {type: FieldTypeEnum.Text, component: DcFormGeneratorTextComponent}
   ];
 

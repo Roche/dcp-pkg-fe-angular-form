@@ -4244,26 +4244,6 @@ const productQualityAggregatedE2E: FormGeneratorElModel[] = [
   }
 ];
 
-const inputTypeTable = [
-  {
-    "Label": null,
-    "Name": "rule_1_violation_table_functional|82",
-    "Description": null,
-    "FieldType": 15,
-    "FieldValidations": [],
-    "FieldOptions": [],
-    "FieldSettings": {
-        "DefaultValue": null,
-        "StepSize": 0,
-        "DataUrl": STORYBOOK_MOCK_API + "/tph/assessment/form/options/table?metricName=rule_1_violation",
-        "IsRepeatable": false,
-        "IsReadOnly": true
-    },
-    "Children": [],
-    "ConditionGroups": []
-},
-]
-
 export const formGeneratorConfigurations = {
   basic: basicConfiguration,
   hint: formWithHint,
@@ -4289,7 +4269,6 @@ export const formGeneratorConfigurations = {
   description: descriptionConfiguration,
   numberWithPrecision: numberWithPrecisionConfiguration,
   extendableDropDown: extendableDropDownConfiguration,
-  inputTypeTable,
   productQualityAggregatedE2E
 }
 

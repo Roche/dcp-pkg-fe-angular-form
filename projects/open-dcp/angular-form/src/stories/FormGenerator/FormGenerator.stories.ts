@@ -581,28 +581,6 @@ export const disabledDropDown: Story = {
   },
 };
 
-export const InputTypeTable: Story = {
-  render: (args) => ({
-    props: {
-      ...args,
-      onFormValueChange: args.onFormValueChange
-    },
-    template: `
-      <div style="width: 100%; display: flex; align-items: center; justify-content: flex-start; gap: 20px; flex-wrap: wrap;">
-        <odcp-form-generator
-            elementsClass="full-width"
-            (onFormValueChange)="onFormValueChange($event)"
-            [formGeneratorSettings]="formGeneratorSettings"
-            [allowMultiSelect]="true">
-        </odcp-form-generator>
-      </div>
-    `
-  }),
-  args: {
-    formGeneratorSettings: formGeneratorConfigurations.inputTypeTable
-  },
-};
-
 export const ProductQualityAggregatedE2E: Story = {
   render: (args) => ({
     props: {
